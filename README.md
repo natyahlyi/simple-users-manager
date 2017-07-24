@@ -1,8 +1,8 @@
 # Simple user management app
 
 ## Requirements
-Python 3.*
-Memcached
+* Python 3
+* Memcached
 
 ```
 $ pip install -r requirements.txt
