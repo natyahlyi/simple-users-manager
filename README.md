@@ -14,5 +14,5 @@ $ python manage.py create_all
 ```
 Runs development server:
 ```
-$ python manage.py create_all
+$ python manage.py runserver
 ```
