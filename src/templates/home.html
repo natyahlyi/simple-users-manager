@@ -1,0 +1,101 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    List of Users
+{% endblock %}
+
+{% block content %}
+
+    <div class="container">
+        <div class="row">
+            <!-- START PAGE TITLE -->
+            <div class="col-sm-12">
+                <div class="text-center"><h2 class="home-title">USERS</h2></div>
+            </div>
+            <!-- END PAGE TITLE -->
+
+            <!-- START TABLE TOOLS -->
+            <div class="hidden-xs col-sm-6 col-md-6 col-lg-4 table-tool-pos">
+                <div class="row left-controls">
+                    <div class="col-sm-1">
+                        <a href="{% url 'user-create' %}" class="btn btn-round btn-default red-btn add-btn" role="button">
+                            <i class="glyphicon glyphicon-plus"></i></a>
+                    </div>
+                    <div class="col-sm-8">
+                        <div class="input-group">
+                            <div class="input-group-btn">
+                                <button class="btn btn-round btn-default green-btn" id="search-btn">
+                                    <i class="glyphicon glyphicon-search"></i></button>
+                            </div>
+                            <input type="text" class="form-control" placeholder="Search" id="search-input"/>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-4 hidden-sm hidden-xs"></div>
+
+
+            <div class="col-xs-3 col-sm-6 col-md-6 col-lg-4 table-tool-pos">
+                <div class="dataTables_length text-right" id="users_length">
+                    <label>
+                        <select name="users_length" aria-controls="users" class="form-control input-sm">
+                            <option value="10">10</option>
+                            <option value="15">15</option>
+                            <option value="20">20</option>
+                        </select>
+                    </label>
+                </div>
+            </div>
+            <!-- END TABLE TOOLS -->
+
+        </div>
+        <!-- START TABLE -->
+        <table id="users-table" class="table" cellspacing="0" width="100%" style="display: none;">
+            <thead>
+            <tr>
+                <th>NAME</th>
+                <th>E-MAIL</th>
+                <th>STATUS</th>
+                <th class="actions-title">ACTION</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for user in users %}
+                <tr id="u-{{ user.id }}" class="table-text">
+                    <td class="table-item"> {{ user.name }}</td>
+                    <td class="table-item"> {{ user.email }}</td>
+                    <td class="table-item {% if user.status == "Active" %}
+                               status-active{% else %}status-inactive{% endif %}">
+                        {{ user.status }}
+                    </td>
+                    <td class="actions">
+                        <span>
+                            <a href="{% url 'user' u_id=user.id %}"
+                               class="btn btn-round btn-default green-btn"
+                               role="button"><i class="glyphicon glyphicon-edit"></i></a>
+                        </span>
+                        <span>
+                          <button data-id="{{ user.id }}" class="btn btn-round btn-default red-btn delete-user">
+                              <i class="glyphicon glyphicon-trash"></i>
+                          </button>
+                        </span>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        <!-- END TABLE -->
+    </div>
+
+{% endblock %}
+
+{% block script %}
+    <script>
+        $(document).ready(function() {
+            initUserTable();
+            var $table = $('#users-table');
+            $table.show();
+        } );
+    </script>
+{% endblock %}

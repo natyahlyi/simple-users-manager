@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block title %}List of Courses{% endblock %}
+
+{% block content %}
+    <div class="container">
+    <!-- START PAGE TITLE -->
+        <div class="row">
+            <div class="text-center">
+                <h2 class="base-title">COURSES</h2>
+            </div>
+        </div>
+    <!-- END PAGE TITLE -->
+    <!-- START TABLE -->
+        <table class="table" cellspacing="0" width="100%">
+            <thead>
+            <tr>
+                <th>NAME</th>
+                <th>CODE</th>
+            </tr>
+            </thead>
+            <tbody>
+                {% for course in courses %}
+                <tr id="u-47" class="table-text">
+                    <td class="table-item">{{ course.title }}</td>
+                    <td class="table-item">{{ course.code }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    <!-- END TABLE -->
+    </div>
+
+{% endblock %}
