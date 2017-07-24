@@ -3,6 +3,7 @@
 ## Requirements
 * Python 3
 * Memcached
+* MySQL
 
 ```
 $ pip install -r requirements.txt
